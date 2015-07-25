@@ -1,3 +1,10 @@
 language: ruby
 rvm:
   - 2.2.0
+
+notifications:
+  email:
+    recipients:
+      - stan001212@gmail.com
+    on_failure: change
+    on_success: never
