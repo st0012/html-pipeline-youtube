@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/st0012/html-pipeline-youtube.svg?branch=master)](https://travis-ci.org/st0012/html-pipeline-youtube)
+
 # HTML::Pipeline Youtube Gem
 A html-pipeline filter that converts youtube url into iframe
 
