@@ -2,6 +2,15 @@ module HTML
   class Pipeline
     class YoutubeFilter < TextFilter
       def call
+        # This filter converts youtube video's url into youtube iframe.
+        #
+        # Context options:
+        #   :video_width - integer, sets iframe's width
+        #   :video_height - integer, sets iframe's height
+        #   :video_frame_border - integer, sets iframe border's width
+        #   :video_wmode - string, sets iframe's wmode option
+        #   :video_autoplay - boolean, whether video should autoplay
+        #   :video_hide_related - boolean, whether shows related videos
         regex = /(https?:\/\/)?(www.)?(youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/watch\?feature=player_embedded&v=)([A-Za-z0-9_-]*)(\&\S+)?(\?\S+)?/
         @text.gsub(regex) do
           youtube_id = $4
