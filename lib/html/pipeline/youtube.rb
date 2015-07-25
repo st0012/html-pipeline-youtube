@@ -1,8 +1,8 @@
 require "html/pipeline/youtube/version"
 
-module Html
+module HTML
   module Pipeline
-    module Youtube
+    class YoutubeFilter
       # Your code goes here...
     end
   end
