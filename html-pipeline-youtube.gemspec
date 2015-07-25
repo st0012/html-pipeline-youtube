@@ -5,9 +5,9 @@ require 'html/pipeline/youtube/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "html-pipeline-youtube"
-  spec.version       = Html::Pipeline::Youtube::VERSION
+  spec.version       = HTML::Pipeline::Youtube::VERSION
   spec.authors       = ["Stan Low"]
-  spec.email         = ["a22301613@yahoo.com.tw"]
+  spec.email         = ["stan001212@gmail.com"]
 
   spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
   spec.description   = %q{TODO: Write a longer description or delete this line.}
