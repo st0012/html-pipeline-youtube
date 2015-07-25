@@ -6,12 +6,12 @@ require 'html/pipeline/youtube/version'
 Gem::Specification.new do |spec|
   spec.name          = "html-pipeline-youtube"
   spec.version       = HTML::Pipeline::Youtube::VERSION
-  spec.authors       = ["Stan Low"]
+  spec.authors       = ["Stan Luo"]
   spec.email         = ["stan001212@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{Youtube filter for html-pipeline}
+  spec.description   = %q{A html-pipeline filter that converts youtube url into iframe}
+  spec.homepage      = "https://github.com/st0012/html-pipeline-youtube"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"
