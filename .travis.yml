@@ -1,12 +1,11 @@
 language: ruby
-install:
-  - gem uninstall bundler
-  - gem install bundler --version '1.8.0'
-  - bundle install
-  
+ 
 script: "bundle exec rspec"
 rvm:
-  - 2.2.0
+  - 2.0
+  - 2.1
+  - 2.2
+  - ruby-head
 
 notifications:
   email:
