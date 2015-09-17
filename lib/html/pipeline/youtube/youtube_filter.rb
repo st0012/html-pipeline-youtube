@@ -11,9 +11,9 @@ module HTML
         #   :video_wmode - string, sets iframe's wmode option
         #   :video_autoplay - boolean, whether video should autoplay
         #   :video_hide_related - boolean, whether shows related videos
-        regex = /(https?:\/\/)?(www.)?(youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/watch\?feature=player_embedded&v=)([A-Za-z0-9_-]*)(\&\S+)?(\?\S+)?/
+        regex = /(\s(https?:\/\/)|^(https?:\/\/))(www.)?(youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/watch\?feature=player_embedded&v=)([A-Za-z0-9_-]*)(\&\S+)?(\?\S+)?/
         @text.gsub(regex) do
-          youtube_id = $4
+          youtube_id = $6
           width = context[:video_width] || 420
           height = context[:video_height] || 315
           frameborder = context[:video_frameborder] || 0
