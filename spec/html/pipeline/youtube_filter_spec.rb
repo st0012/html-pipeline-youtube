@@ -8,6 +8,19 @@ describe HTML::Pipeline::YoutubeFilter do
     expect(HTML::Pipeline::Youtube::VERSION).not_to be nil
   end
 
+  context "With other filter's result" do
+    it "doesn't effect links in markdown" do
+      markdown_link = "[Video](https://www.youtube.com/watch?v=Kg4aWWIsszw)"
+
+      expect(subject.to_html(markdown_link)).to eq(markdown_link)
+    end
+    it "doesn't effect links in html tag" do
+      hyper_link = %(<a href="https://www.youtube.com/watch?v=Kg4aWWIsszw">Video</a>)
+
+      expect(subject.to_html(hyper_link)).to eq(hyper_link)
+    end
+  end
+
   context "With no options" do
     it "generates iframe with default setting" do
       expect(subject.to_html(youtube_url)).to eq(
