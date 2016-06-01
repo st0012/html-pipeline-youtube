@@ -19,11 +19,18 @@ describe HTML::Pipeline::YoutubeFilter do
 
       expect(subject.to_html(hyper_link)).to eq(hyper_link)
     end
-    it "does affect links in html element" do
+    it "does affect links in a div" do
       hyper_link = %(<div>https://www.youtube.com/watch?v=Kg4aWWIsszw</div>)
 
       expect(subject.to_html(hyper_link)).to eq(
         %(<div><div class="video youtube"><iframe width="420" height="315" src="//www.youtube.com/embed/Kg4aWWIsszw" frameborder="0" allowfullscreen></iframe></div></div>)
+      )
+    end
+    it "does affect links after a br" do
+      hyper_link = %(<br>https://www.youtube.com/watch?v=Kg4aWWIsszw)
+
+      expect(subject.to_html(hyper_link)).to eq(
+        %(<br><div class="video youtube"><iframe width="420" height="315" src="//www.youtube.com/embed/Kg4aWWIsszw" frameborder="0" allowfullscreen></iframe></div>)
       )
     end
   end
