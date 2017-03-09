@@ -11,10 +11,9 @@ module HTML
         #   :video_wmode - string, sets iframe's wmode option
         #   :video_autoplay - boolean, whether video should autoplay
         #   :video_hide_related - boolean, whether shows related videos
-        regex = /(\s|^|<div>|<br>)(https?:\/\/)(www.)?(youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/watch\?feature=player_embedded&v=)([A-Za-z0-9_-]*)(\&\S+)?(\?\S+)?/
+        regex = /(?<=^|\s|<div>|<br>)https?:\/\/(?:www.)?(?:youtube\.com\/(?:embed\/|watch\?(?:feature=player_embedded&)?v=)|youtu\.be\/)([A-Za-z0-9_-]*)[&?\w-]*/
         @text.gsub(regex) do
-          youtube_id = $5
-          close_tag = $1 if ["<br>", "<div>"].include? $1
+          youtube_id = $1
           width = context[:video_width] || 420
           height = context[:video_height] || 315
           frameborder = context[:video_frameborder] || 0
@@ -28,7 +27,8 @@ module HTML
           params << "rel=0" if hide_related
           src += "?#{params.join '&'}" unless params.empty?
 
-          %{#{close_tag}<div class="video youtube"><iframe width="#{width}" height="#{height}" src="#{src}" frameborder="#{frameborder}" allowfullscreen></iframe></div>}
+          # Prefix with two "\n" for compatibility with markup such as Markdown:
+          %{\n\n<div class="video youtube"><iframe width="#{width}" height="#{height}" src="#{src}" frameborder="#{frameborder}" allowfullscreen></iframe></div>}
         end
       end
     end
