@@ -23,14 +23,26 @@ describe HTML::Pipeline::YoutubeFilter do
       hyper_link = %(<div>https://www.youtube.com/watch?v=Kg4aWWIsszw</div>)
 
       expect(subject.to_html(hyper_link)).to eq(
-        %(<div><div class="video youtube"><iframe width="420" height="315" src="//www.youtube.com/embed/Kg4aWWIsszw" frameborder="0" allowfullscreen></iframe></div></div>)
+        %(<div>\n\n<div class="video youtube"><iframe width="420" height="315" src="//www.youtube.com/embed/Kg4aWWIsszw" frameborder="0" allowfullscreen></iframe></div></div>)
       )
     end
     it "does affect links after a br" do
       hyper_link = %(<br>https://www.youtube.com/watch?v=Kg4aWWIsszw)
 
       expect(subject.to_html(hyper_link)).to eq(
-        %(<br><div class="video youtube"><iframe width="420" height="315" src="//www.youtube.com/embed/Kg4aWWIsszw" frameborder="0" allowfullscreen></iframe></div>)
+        %(<br>\n\n<div class="video youtube"><iframe width="420" height="315" src="//www.youtube.com/embed/Kg4aWWIsszw" frameborder="0" allowfullscreen></iframe></div>)
+      )
+    end
+    it "does not consume whitespace" do
+      source = 'Check out https://www.youtube.com/watch?v=Kg4aWWIsszw now'
+      expect(subject.to_html(source)).to eq(
+        %(Check out \n\n<div class="video youtube"><iframe width="420" height="315" src="//www.youtube.com/embed/Kg4aWWIsszw" frameborder="0" allowfullscreen></iframe></div> now)
+      )
+    end
+    it "supports /embed URLs" do
+      source = 'https://www.youtube.com/embed/Kg4aWWIsszw'
+      expect(subject.to_html(source)).to eq(
+        %(\n\n<div class="video youtube"><iframe width="420" height="315" src="//www.youtube.com/embed/Kg4aWWIsszw" frameborder="0" allowfullscreen></iframe></div>)
       )
     end
   end
@@ -38,7 +50,7 @@ describe HTML::Pipeline::YoutubeFilter do
   context "With no options" do
     it "generates iframe with default setting" do
       expect(subject.to_html(youtube_url)).to eq(
-        %(<div class="video youtube"><iframe width="420" height="315" src="//www.youtube.com/embed/Kg4aWWIsszw" frameborder="0" allowfullscreen></iframe></div>)
+        %(\n\n<div class="video youtube"><iframe width="420" height="315" src="//www.youtube.com/embed/Kg4aWWIsszw" frameborder="0" allowfullscreen></iframe></div>)
       )
     end
   end
@@ -55,7 +67,7 @@ describe HTML::Pipeline::YoutubeFilter do
       )
 
       expect(result).to eq(
-        %(<div class="video youtube"><iframe width="500" height="100" src="//www.youtube.com/embed/Kg4aWWIsszw?autoplay=1&rel=0" frameborder="5" allowfullscreen></iframe></div>)
+        %(\n\n<div class="video youtube"><iframe width="500" height="100" src="//www.youtube.com/embed/Kg4aWWIsszw?autoplay=1&rel=0" frameborder="5" allowfullscreen></iframe></div>)
       )
     end
   end
